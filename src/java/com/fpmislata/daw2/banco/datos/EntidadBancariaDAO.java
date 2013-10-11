@@ -9,14 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
-public class EntidadBancariaDAO {
-
-    ConnectionFactory connectionFactory = new ConnectionFactoryImpJDBC();
-
-    public EntidadBancaria read(int idEntidadBancaria) throws SQLException {
-
-        Connection connection = connectionFactory.getConnection();
+public class EntidadBancariaDAO{
+       
+    ConnectionFactory connectionFactory = new ConnectionFactoryImpJNDI();
+    
+    public EntidadBancaria read(int idEntidadBancaria) throws SQLException, NamingException {
+        
+        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
 
         EntidadBancaria entidadBancaria;
 
@@ -46,9 +48,9 @@ public class EntidadBancariaDAO {
 
     }
 
-    public void insert(EntidadBancaria entidadBancaria) throws SQLException {
+    public void insert(EntidadBancaria entidadBancaria) throws SQLException, NamingException {
 
-        Connection connection = connectionFactory.getConnection();
+        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
 
         String insertTableSQL = "INSERT INTO entidadbancaria (idEntidad, codigoEntidad, nombre, cif,tipoEntidadBancaria) VALUES (?,?,?,?,?)";
 
@@ -64,9 +66,9 @@ public class EntidadBancariaDAO {
         connection.close();
     }
 
-    public void update(EntidadBancaria entidadBancaria) throws SQLException {
+    public void update(EntidadBancaria entidadBancaria) throws SQLException, NamingException {
 
-        Connection connection = connectionFactory.getConnection();
+       Connection connection=new ConnectionFactoryImpJNDI().getConnection();
 
         String updateSQL = "UPDATE entidadbancaria SET codigoEntidad=?,nombre=?,cif=?,tipoEntidadBancaria=? WHERE idEntidad=?";
 
@@ -81,9 +83,9 @@ public class EntidadBancariaDAO {
         connection.close();
     }
 
-    public void delete(int idEntidadBancaria) throws SQLException {
+    public void delete(int idEntidadBancaria) throws SQLException, NamingException {
 
-        Connection connection = connectionFactory.getConnection();
+        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
 
         String deleteSQL = "DELETE FROM entidadbancaria WHERE idEntidad=?";
 
@@ -96,9 +98,9 @@ public class EntidadBancariaDAO {
 
     }
 
-    public List<EntidadBancaria> findAll() throws SQLException {
+    public List<EntidadBancaria> findAll() throws SQLException, NamingException {
 
-        Connection connection = connectionFactory.getConnection();
+        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
 
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
         String selectAllSQL = "SELECT * FROM entidadbancaria";
@@ -123,9 +125,9 @@ public class EntidadBancariaDAO {
 
     }
 
-    public List<EntidadBancaria> findByCodigo(String codigo) throws SQLException {
+    public List<EntidadBancaria> findByCodigo(String codigo) throws SQLException, NamingException {
 
-        Connection connection = connectionFactory.getConnection();
+        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
 
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
         String selectAllSQL = "SELECT * FROM entidadbancaria WHERE codigoEntidad=?";
