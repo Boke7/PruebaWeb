@@ -1,3 +1,4 @@
+<%@page import="com.fpmislata.daw2.banco.datos.EntidadBancariaDAOImpJDBC"%>
 <%@page import="java.util.List"%>
 <%@page import="com.fpmislata.daw2.banco.negocio.TipoEntidadBancaria"%>
 <%@page import="com.fpmislata.daw2.banco.negocio.EntidadBancaria"%>
@@ -8,7 +9,7 @@
 
        
 <%
-    EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAO();
+    EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpJDBC();
     
     List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
     
