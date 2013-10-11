@@ -112,7 +112,7 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
     }
 
     @Override
-    public List<EntidadBancaria> findByCodigo(String codigo) throws SQLException, NamingException {
+    public List<EntidadBancaria> findByCodigo(String codigo) throws SQLException, NamingException  {
         Connection connection = connectionFactory.getConnection();
 
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
