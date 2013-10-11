@@ -12,13 +12,13 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class EntidadBancariaDAO{
-       
+public class EntidadBancariaDAO {
+
     ConnectionFactory connectionFactory = new ConnectionFactoryImpJNDI();
-    
+
     public EntidadBancaria read(int idEntidadBancaria) throws SQLException, NamingException {
-        
-        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
+
+        Connection connection = connectionFactory.getConnection();
 
         EntidadBancaria entidadBancaria;
 
@@ -50,7 +50,7 @@ public class EntidadBancariaDAO{
 
     public void insert(EntidadBancaria entidadBancaria) throws SQLException, NamingException {
 
-        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
+        Connection connection = connectionFactory.getConnection();
 
         String insertTableSQL = "INSERT INTO entidadbancaria (idEntidad, codigoEntidad, nombre, cif,tipoEntidadBancaria) VALUES (?,?,?,?,?)";
 
@@ -68,7 +68,7 @@ public class EntidadBancariaDAO{
 
     public void update(EntidadBancaria entidadBancaria) throws SQLException, NamingException {
 
-       Connection connection=new ConnectionFactoryImpJNDI().getConnection();
+        Connection connection = connectionFactory.getConnection();
 
         String updateSQL = "UPDATE entidadbancaria SET codigoEntidad=?,nombre=?,cif=?,tipoEntidadBancaria=? WHERE idEntidad=?";
 
@@ -85,7 +85,7 @@ public class EntidadBancariaDAO{
 
     public void delete(int idEntidadBancaria) throws SQLException, NamingException {
 
-        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
+        Connection connection = connectionFactory.getConnection();
 
         String deleteSQL = "DELETE FROM entidadbancaria WHERE idEntidad=?";
 
@@ -100,7 +100,7 @@ public class EntidadBancariaDAO{
 
     public List<EntidadBancaria> findAll() throws SQLException, NamingException {
 
-        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
+        Connection connection = connectionFactory.getConnection();
 
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
         String selectAllSQL = "SELECT * FROM entidadbancaria";
@@ -127,7 +127,7 @@ public class EntidadBancariaDAO{
 
     public List<EntidadBancaria> findByCodigo(String codigo) throws SQLException, NamingException {
 
-        Connection connection=new ConnectionFactoryImpJNDI().getConnection();
+        Connection connection = connectionFactory.getConnection();
 
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
         String selectAllSQL = "SELECT * FROM entidadbancaria WHERE codigoEntidad=?";
