@@ -21,8 +21,13 @@
         <link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet"> 
     </head>
     <body>
-        <h1><%= nombre%></h1>
-        <table class="table">
+         <form name="Formulario" method="GET" action="index.jsp">
+            <p>Introduce el nombre de una entidad
+            <input type="text" name="nombre">
+            </p>
+            <input type="submit" value="Enviar" name="enviar">
+        </form>
+        <table class="btn-warning">
             <tr>
                 <td>ID</td><td>Codigo</td><td>Nombre</td><td>CIF</td><td>Tipo</td>
             </tr>
