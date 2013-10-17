@@ -10,8 +10,8 @@
        
 <%
     EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpJDBC();
-    
-    List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
+    String nombre = request.getParameter("nombre");
+    List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findByNombre(nombre);
     
 %>
  
@@ -21,6 +21,7 @@
         <link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet"> 
     </head>
     <body>
+        <h1><%= nombre%></h1>
         <table class="table">
             <tr>
                 <td>ID</td><td>Codigo</td><td>Nombre</td><td>CIF</td><td>Tipo</td>

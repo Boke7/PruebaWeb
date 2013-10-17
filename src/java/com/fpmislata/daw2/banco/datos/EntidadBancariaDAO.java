@@ -25,5 +25,7 @@ public interface EntidadBancariaDAO {
     public List<EntidadBancaria> findAll() throws SQLException, NamingException;
 
     public List<EntidadBancaria> findByCodigo(String codigo) throws SQLException, NamingException;
+    
+    public List<EntidadBancaria> findByNombre(String nombre) throws SQLException, NamingException;
 
      }

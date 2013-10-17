@@ -112,7 +112,7 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
     }
 
     @Override
-    public List<EntidadBancaria> findByCodigo(String codigo) throws SQLException, NamingException  {
+    public List<EntidadBancaria> findByCodigo(String codigo) throws SQLException, NamingException {
         Connection connection = connectionFactory.getConnection();
 
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
@@ -156,5 +156,34 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
 
         preparedStatement.executeUpdate();
         connection.close();
+    }
+
+    @Override
+    public List<EntidadBancaria> findByNombre(String nombre) throws SQLException, NamingException {
+        Connection connection = connectionFactory.getConnection();
+
+        List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
+        String selectAllSQL = "SELECT * FROM entidadbancaria WHERE nombre LIKE ?;";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(selectAllSQL);
+
+        preparedStatement.setString(1, "%"+nombre+"%");
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next() == true) {
+
+            EntidadBancaria entidadBancaria = new EntidadBancaria();
+
+            entidadBancaria.setIdEntidadBancaria(resultSet.getInt("idEntidad"));
+            entidadBancaria.setCodigoEntidad(resultSet.getString("codigoEntidad"));
+            entidadBancaria.setNombre(resultSet.getString("nombre"));
+            entidadBancaria.setCif(resultSet.getString("cif"));
+            entidadBancaria.setTipoEntidadBancaria(TipoEntidadBancaria.valueOf(resultSet.getString("tipoEntidadBancaria")));
+
+            entidadesBancarias.add(entidadBancaria);
+        }
+
+        connection.close();
+        return entidadesBancarias;
     }
 }
